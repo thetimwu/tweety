@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return "https://i.pravatar.cc/50?u=" . $this->email;
     }
+
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'user_follower', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    public function follow(User $user)
+    {
+        return $this->follows()->save($user);
+    }
 }
