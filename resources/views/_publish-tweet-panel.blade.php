@@ -1,5 +1,5 @@
 <div class="border border-blue-400 rounded-lg px-8 py-6 mb-8">
-    <form action="/home" method="POST">
+    <form action="/tweets" method="POST">
         @csrf
         <textarea name="body" id="body" class="w-full" placeholder="What's up doc?"></textarea>
 

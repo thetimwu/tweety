@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Tweet;
+use App\User;
 use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
+    public function index()
+    {
+        return view('home', ['tweets' => auth()->user()->timeline()]);
+    }
 
     public function store()
     {
@@ -19,6 +24,6 @@ class TweetController extends Controller
             'body' => $body['body']
         ]);
 
-        return redirect('/home');
+        return redirect('/tweets');
     }
 }
