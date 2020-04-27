@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function getAvatorAttribute()
     {
-        return "https://i.pravatar.cc/50?u=" . $this->email;
+        return "https://i.pravatar.cc/200?u=" . $this->email;
     }
 
     public function follows()
@@ -67,4 +67,10 @@ class User extends Authenticatable
     {
         return $this->follows()->save($user);
     }
+
+    // for laravel 6 or below
+    // public function getRouteKeyName()
+    // {
+    //     return 'name';
+    // }
 }
