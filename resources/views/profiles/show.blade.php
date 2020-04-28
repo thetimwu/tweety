@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app>
     <header class="mb-6 relative">
         <div class="relative">
             <img src="{{asset('images/default-profile-banner.jpg')}}" 
@@ -20,7 +18,11 @@
             </div>
 
             <div class="flex ">
-                <a href="" class=" rounded-full border border-gray-300 py-2 px-2 text-black text-xs mr-2">Edit Profile</a>
+                @can('edit', $user)
+                <a href="{{$user->path('edit')}}"
+                    class=" rounded-full border border-gray-300 py-2 px-2 text-black text-xs mr-2">
+                    Edit Profile</a>
+                @endcan
 
                 <x-follow-button :user="$user"></x-follow-button>
 
@@ -34,4 +36,4 @@
     </header>
 
     @include('_timeline', ['tweets' => $user->tweets])
-@endsection
+</x-app>
