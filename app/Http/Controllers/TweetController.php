@@ -24,6 +24,6 @@ class TweetController extends Controller
             'body' => $body['body']
         ]);
 
-        return redirect('/tweets');
+        return redirect()->route('home');
     }
 }

@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Tweet;
+use App\Traits\Followable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +41,7 @@ class User extends Authenticatable
 
     public function tweets()
     {
-        return $this->hasMany('App\Tweet');
+        return $this->hasMany('App\Tweet')->latest();
     }
 
     public function timeline()
@@ -58,15 +59,6 @@ class User extends Authenticatable
         return "https://i.pravatar.cc/200?u=" . $this->email;
     }
 
-    public function follows()
-    {
-        return $this->belongsToMany(User::class, 'user_follower', 'user_id', 'follower_id')->withTimestamps();
-    }
-
-    public function follow(User $user)
-    {
-        return $this->follows()->save($user);
-    }
 
     // for laravel 6 or below
     // public function getRouteKeyName()
