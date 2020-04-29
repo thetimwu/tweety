@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username', 'avatar'
     ];
 
     /**
@@ -54,14 +54,14 @@ class User extends Authenticatable
         return Tweet::whereIn('user_id', $ids)->latest()->get();
     }
 
-    public function getAvatorAttribute()
+    public function getAvatarAttribute($value)
     {
-        return "https://i.pravatar.cc/200?u=" . $this->email;
+        return asset('storage/' . $value);
     }
 
     public function path($append = '')
     {
-        $route = route('profile', $this->name);
+        $route = route('profile', $this->username);
         return $append ? "{$route}/{$append}" : $route;
     }
 
