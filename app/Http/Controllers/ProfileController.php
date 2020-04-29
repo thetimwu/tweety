@@ -28,12 +28,14 @@ class ProfileController extends Controller
         $validatedData = request()->validate([
             'username' => ['required', 'max:255', Rule::unique('users')->ignore($user)],
             'name' => 'required|string|min:3',
-            'avatar' => ['required', 'file'],
+            'avatar' => ['file'],
             'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($user)],
             'password' => 'required|min:6|confirmed'
         ]);
 
-        $validatedData['avatar'] = request('avatar')->store('avatars');
+        if (request('avatar')) {
+            $validatedData['avatar'] = request('avatar')->store('avatars');
+        }
 
         $user->update($validatedData);
 

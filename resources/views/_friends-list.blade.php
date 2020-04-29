@@ -6,8 +6,8 @@
     <li class="mb-4">
         <div>
             <a href="{{route('profile', $follower)}}" class="flex items-center text-sm">
-                <img src="{{$follower->avator}}" 
-                alt="your avator" 
+                <img src="{{$follower->avatar}}" 
+                alt="your avatar" 
                 class="rounded-full mr-2"
                 height="40"
                 width="40">
